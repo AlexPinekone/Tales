@@ -12,7 +12,14 @@ config_version=5
 
 config/name="Tales"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://dsik0bejllsq8"
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [rendering]
 
