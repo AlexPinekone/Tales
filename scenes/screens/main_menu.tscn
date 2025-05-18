@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://b63ulb2n0anj3"]
+
+[ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="1_idsrk"]
+[ext_resource type="Shader" uid="uid://cevufy2datsp7" path="res://shaders/dissolve.gdshader" id="2_5weqt"]
+[ext_resource type="Script" uid="uid://cs3kymxwiirh3" path="res://scripts/transition.gd" id="3_kacuo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kr80i"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
+noise = SubResource("FastNoiseLite_kr80i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e21yp"]
+shader = ExtResource("2_5weqt")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_lquwl")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.06
+shader_parameter/burn_color = Color(0.787313, 0.211575, 0, 1)
+
+[sub_resource type="Animation" id="Animation_lquwl"]
+resource_name = "start_level"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.000351563, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(640.25, -359.5), Vector2(640.25, 360.627), Vector2(640.25, 360.5)]
+}
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640.25, 360.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_272bh"]
+_data = {
+&"RESET": SubResource("Animation_7mycd"),
+&"start_level": SubResource("Animation_lquwl")
+}
+
+[node name="menu" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(842, 249)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+position = Vector2(842, -249)
+rotation = 3.14159
+scale = Vector2(1.9, -1.9)
+anchor_mode = 0
+zoom = Vector2(0.668, 0.668)
+
+[node name="Sheet" type="Sprite2D" parent="Node2D"]
+position = Vector2(201.75, 111.5)
+rotation = 3.14159
+scale = Vector2(0.665365, -0.665741)
+texture = ExtResource("1_idsrk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.12549, 0.188235, 0.196078, 0.494118)
+
+[node name="Transition" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_e21yp")
+position = Vector2(640.25, 360.5)
+scale = Vector2(0.665365, 0.665741)
+texture = ExtResource("1_idsrk")
+script = ExtResource("3_kacuo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
+libraries = {
+&"": SubResource("AnimationLibrary_272bh")
+}
+autoplay = "start_level"

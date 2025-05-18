@@ -1,15 +1,105 @@
-[gd_scene load_steps=4 format=3 uid="uid://1en6alrl73cv"]
+[gd_scene load_steps=14 format=3 uid="uid://1en6alrl73cv"]
 
 [ext_resource type="Script" uid="uid://bl87xf0gjwe2r" path="res://scripts/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://q8mg3rv7ipgt" path="res://scenes/objects/card.tscn" id="2_0xm2m"]
+[ext_resource type="Shader" uid="uid://cevufy2datsp7" path="res://shaders/dissolve.gdshader" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="2_h2yge"]
+[ext_resource type="FontFile" uid="uid://0t0kiduetpyb" path="res://assets/fonts/MorrisRomanAlternate-Black.ttf" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://dhparujrn07ns" path="res://scenes/characters/character1.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cs3kymxwiirh3" path="res://scripts/transition.gd" id="6_7mycd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_272bh"]
+noise = SubResource("FastNoiseLite_1bvp3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = ExtResource("2_1bvp3")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_272bh")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.06
+shader_parameter/burn_color = Color(0.752449, 0.291689, 0.0840509, 1)
+
+[sub_resource type="Animation" id="Animation_lquwl"]
+resource_name = "start_level"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.000351563, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(640.25, -359.5), Vector2(640.25, 360.627), Vector2(640.25, 360.5)]
+}
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640.25, 360.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_272bh"]
+_data = {
+&"RESET": SubResource("Animation_7mycd"),
+&"start_level": SubResource("Animation_lquwl")
+}
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
-[node name="Gallery" type="Sprite2D" parent="."]
-position = Vector2(640.25, 360.5)
-scale = Vector2(0.665365, 0.665741)
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(842, 249)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+position = Vector2(842, -249)
+rotation = 3.14159
+scale = Vector2(1.9, -1.9)
+anchor_mode = 0
+zoom = Vector2(0.668, 0.668)
+
+[node name="Sheet" type="Sprite2D" parent="Node2D"]
+position = Vector2(201.75, 111.5)
+rotation = 3.14159
+scale = Vector2(0.665365, -0.665741)
 texture = ExtResource("2_h2yge")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -20,10 +110,54 @@ color = Color(0.12549, 0.188235, 0.196078, 0.494118)
 [node name="Deck" type="Node2D" parent="."]
 
 [node name="Card_1" parent="Deck" instance=ExtResource("2_0xm2m")]
-position = Vector2(395, 577)
+position = Vector2(333, 578)
 
 [node name="Card_2" parent="Deck" instance=ExtResource("2_0xm2m")]
-position = Vector2(662, 579)
+position = Vector2(650, 577)
 
 [node name="Card_3" parent="Deck" instance=ExtResource("2_0xm2m")]
-position = Vector2(925, 577)
+position = Vector2(952, 577)
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="Stage"]
+offset_left = 140.0
+offset_top = 100.0
+offset_right = 1140.0
+offset_bottom = 400.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[node name="Chara2" parent="Stage" instance=ExtResource("5_lquwl")]
+position = Vector2(842, 249)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Chara" parent="Stage" instance=ExtResource("5_lquwl")]
+position = Vector2(417, 246)
+
+[node name="Narration" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Narration"]
+offset_left = 140.0
+offset_top = 420.0
+offset_right = 1140.0
+offset_bottom = 490.0
+theme_override_fonts/normal_font = ExtResource("5_272bh")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Caperucita roja encontró una anciana que le ofece una [wave amp=50.0 freq=5.0 connected=1]manzana[/wave]."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Transition" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lquwl")
+position = Vector2(640.25, 360.5)
+scale = Vector2(0.665365, 0.665741)
+texture = ExtResource("2_h2yge")
+script = ExtResource("6_7mycd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
+libraries = {
+&"": SubResource("AnimationLibrary_272bh")
+}
+autoplay = "start_level"
