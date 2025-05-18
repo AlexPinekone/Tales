@@ -1,29 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://1en6alrl73cv"]
+[gd_scene load_steps=3 format=3 uid="uid://1en6alrl73cv"]
 
 [ext_resource type="Script" uid="uid://bl87xf0gjwe2r" path="res://scripts/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://q8mg3rv7ipgt" path="res://scenes/objects/card.tscn" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="2_h2yge"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
-[node name="Gallery" type="Sprite2D" parent="."]
-position = Vector2(640.25, 360.5)
-scale = Vector2(0.665365, 0.665741)
-texture = ExtResource("2_h2yge")
-
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.12549, 0.188235, 0.196078, 0.494118)
+color = Color(0.12627, 0.189716, 0.196066, 1)
 
 [node name="Deck" type="Node2D" parent="."]
 
 [node name="Card_1" parent="Deck" instance=ExtResource("2_0xm2m")]
-position = Vector2(395, 577)
+position = Vector2(365, 386)
 
 [node name="Card_2" parent="Deck" instance=ExtResource("2_0xm2m")]
-position = Vector2(662, 579)
+position = Vector2(568, 399)
 
 [node name="Card_3" parent="Deck" instance=ExtResource("2_0xm2m")]
-position = Vector2(925, 577)
+position = Vector2(758, 398)
