@@ -24,7 +24,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	enteringfinished = false
 	if animationTransition and animationTransition.has_animation("start_level"):
 		animationTransition.play("start_level")
-		for children : Node2D in get_children(): #Hacer todos los nodos del estado acutal visible
+		for children in get_children(): #Hacer todos los nodos del estado acutal visible
 			children.visible = true
 			pass
 		await animationTransition.animation_finished
