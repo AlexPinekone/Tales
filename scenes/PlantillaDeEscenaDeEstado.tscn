@@ -88,6 +88,13 @@ font_color = Color(0.1812, 0.1812, 0.1812, 1)
 
 [node name="TemplateNode" type="Node"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -1)
+rotation = 3.14159
+scale = Vector2(1.9, -1.9)
+anchor_mode = 0
+zoom = Vector2(0.668, 0.668)
+
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(842, 249)
 rotation = 3.14159
