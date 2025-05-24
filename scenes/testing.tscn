@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkxnox1lwo3sp"]
+
+[ext_resource type="Script" uid="uid://b4vx5dostc3m2" path="res://scripts/StateMachine.gd" id="1_feb8i"]
+
+[node name="TestRoom" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(842, 249)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+position = Vector2(842, -249)
+rotation = 3.14159
+scale = Vector2(1.9, -1.9)
+anchor_mode = 0
+zoom = Vector2(0.668, 0.668)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_feb8i")
+initial_state = NodePath("")
+metadata/_custom_type_script = "uid://b4vx5dostc3m2"
