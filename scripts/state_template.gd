@@ -7,7 +7,7 @@ var isExiting : bool = false
 
 ## Called by the state machine on the engine's main loop tick.
 func update(_delta: float) -> void:
-	if not  enteringfinished: #Ejecuta el codigo del estado actual una vez que se haya finalizado la animacion de transicion
+	if enteringfinished: #Ejecuta el codigo del estado actual una vez que se haya finalizado la animacion de transicion
 		if(isExiting): #Si se activo la condicion de cambio de estado ejecutar transicion de cambio
 			print("exiting transition " + name)
 			animationTransition.play_backwards("start_level") #transicion de cambio o restart
@@ -21,14 +21,14 @@ func update(_delta: float) -> void:
 	pass
 
 func enter(previous_state_path: String, data := {}) -> void:
-	enteringfinished = true
+	enteringfinished = false
 	if animationTransition and animationTransition.has_animation("start_level"):
 		animationTransition.play("start_level")
 		for children : Node2D in get_children(): #Hacer todos los nodos del estado acutal visible
 			children.visible = true
 			pass
 		await animationTransition.animation_finished
-		enteringfinished = false
+		enteringfinished = true
 		isExiting = false
 	else:
 		print("Warning: animationTransition is null or 'start_level' doesn't exist")
