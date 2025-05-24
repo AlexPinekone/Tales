@@ -1,17 +1,21 @@
-extends Node2D
+class_name cardDecision extends Node2D
+
+
 
 @export var angle_x_max: float = 16.0
 @export var angle_y_max: float = 16.0
+@export var nextScene : String
+var isSelected : bool
 @onready var sub_viewport_container: SubViewportContainer = $SubViewportContainer
 var tween_hover: Tween
 var size = Vector2(250,150)
 
 func _ready() -> void:
+	isSelected = false
 	sub_viewport_container.material = sub_viewport_container.material.duplicate()
 
 func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 	var mouse_pos: Vector2 = get_local_mouse_position()
-
 	var lerp_val_x: float = remap(mouse_pos.x+size.x/2, 0.0, size.x, 0, 1)
 	var lerp_val_y: float = remap(mouse_pos.y+size.y/2, 0.0, size.y, 0, 1)
 	#print("Lerp val x: ", lerp_val_x)
@@ -24,6 +28,11 @@ func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 	
 	sub_viewport_container.material.set_shader_parameter("x_rot", rot_y)
 	sub_viewport_container.material.set_shader_parameter("y_rot", rot_x)
+	
+	if event is InputEventMouseButton and not isSelected:
+		isSelected = true
+		print(name)
+		pass
 
 
 func _on_sub_viewport_container_mouse_exited() -> void:
@@ -44,3 +53,7 @@ func _on_sub_viewport_container_mouse_entered() -> void:
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
+
+
+func _on_area_2d_input_event(viewport:Node, event:InputEvent, shape_idx:int) -> void:
+	pass # Replace with function body.
