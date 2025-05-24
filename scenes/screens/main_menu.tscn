@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b63ulb2n0anj3"]
+[gd_scene load_steps=12 format=3 uid="uid://b63ulb2n0anj3"]
 
 [ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="1_idsrk"]
+[ext_resource type="Script" uid="uid://cq7qdfiy3xy0n" path="res://scripts/main_menu.gd" id="1_kacuo"]
 [ext_resource type="Shader" uid="uid://cevufy2datsp7" path="res://shaders/dissolve.gdshader" id="2_5weqt"]
+[ext_resource type="FontFile" uid="uid://0t0kiduetpyb" path="res://assets/fonts/MorrisRomanAlternate-Black.ttf" id="2_kacuo"]
 [ext_resource type="Script" uid="uid://cs3kymxwiirh3" path="res://scripts/transition.gd" id="3_kacuo"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kr80i"]
@@ -15,6 +17,33 @@ shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_lquwl")
 shader_parameter/dissolve_value = 1.0
 shader_parameter/burn_size = 0.06
 shader_parameter/burn_color = Color(0.787313, 0.211575, 0, 1)
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640.25, 360.5)]
+}
 
 [sub_resource type="Animation" id="Animation_lquwl"]
 resource_name = "start_level"
@@ -44,33 +73,6 @@ tracks/1/keys = {
 "values": [Vector2(640.25, -359.5), Vector2(640.25, 360.627), Vector2(640.25, 360.5)]
 }
 
-[sub_resource type="Animation" id="Animation_7mycd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(640.25, 360.5)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_272bh"]
 _data = {
 &"RESET": SubResource("Animation_7mycd"),
@@ -78,6 +80,7 @@ _data = {
 }
 
 [node name="menu" type="Node2D"]
+script = ExtResource("1_kacuo")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(842, 249)
@@ -102,7 +105,27 @@ offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.12549, 0.188235, 0.196078, 0.494118)
 
+[node name="buttonStart" type="Button" parent="."]
+offset_left = 519.0
+offset_top = 413.0
+offset_right = 784.0
+offset_bottom = 496.0
+theme_override_fonts/font = ExtResource("2_kacuo")
+theme_override_font_sizes/font_size = 50
+text = "Iniciar"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 217.0
+offset_top = 207.0
+offset_right = 1054.0
+offset_bottom = 414.0
+theme_override_fonts/normal_font = ExtResource("2_kacuo")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "Una Caperucita Roja"
+
 [node name="Transition" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_e21yp")
 position = Vector2(640.25, 360.5)
 scale = Vector2(0.665365, 0.665741)
@@ -114,3 +137,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_272bh")
 }
 autoplay = "start_level"
+
+[connection signal="pressed" from="buttonStart" to="." method="_on_button_start_pressed"]
