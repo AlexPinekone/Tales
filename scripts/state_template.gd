@@ -13,7 +13,7 @@ func update(_delta: float) -> void:
 			animationTransition.play_backwards("start_level") #transicion de cambio o restart
 			await animationTransition.animation_finished #Esperar a que la transicion acabe
 			finished.emit(nextState) #cambiar al siguiente estado
-		else:
+		else: #Logica del estado actual va aqui
 			print("current state " + name)
 	else:
 		print("entering transition")
