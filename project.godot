@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Tales"
+run/main_scene="uid://cogkr6mbgk3h3"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/image="uid://dsik0bejllsq8"
 config/icon="res://icon.svg"

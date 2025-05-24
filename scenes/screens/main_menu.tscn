@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b63ulb2n0anj3"]
 
 [ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="1_idsrk"]
-[ext_resource type="Script" uid="uid://cq7qdfiy3xy0n" path="res://scripts/main_menu.gd" id="1_kacuo"]
+[ext_resource type="Script" uid="uid://be7727yx5b4p6" path="res://scripts/main_menu.gd" id="1_kacuo"]
 [ext_resource type="Shader" uid="uid://cevufy2datsp7" path="res://shaders/dissolve.gdshader" id="2_5weqt"]
 [ext_resource type="FontFile" uid="uid://0t0kiduetpyb" path="res://assets/fonts/MorrisRomanAlternate-Black.ttf" id="2_kacuo"]
 [ext_resource type="Script" uid="uid://cs3kymxwiirh3" path="res://scripts/transition.gd" id="3_kacuo"]

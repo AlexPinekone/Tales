@@ -25,7 +25,7 @@ func update(_delta: float) -> void:
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(previous_state_path: String, data := {}) -> void:
-	visible = true
+	#visible = true
 	$Transition.visible = true
 	enteringfinished = false
 	if animationTransition and animationTransition.has_animation("start_level"):
@@ -44,6 +44,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 ## Called by the state machine before changing the active state. Use this function
 ## to clean up the state.
 func exit() -> void:
-	visible = false
+	#visible = false
 	print("exiting " + name)
 	pass
