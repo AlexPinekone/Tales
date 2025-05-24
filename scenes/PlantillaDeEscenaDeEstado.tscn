@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhep8iqo23n47"]
+[gd_scene load_steps=14 format=3 uid="uid://dhep8iqo23n47"]
 
 [ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="1_v0ju2"]
 [ext_resource type="Shader" uid="uid://cevufy2datsp7" path="res://shaders/dissolve.gdshader" id="2_7nhrv"]
 [ext_resource type="Script" uid="uid://cs3kymxwiirh3" path="res://scripts/transition.gd" id="3_rcbml"]
+[ext_resource type="PackedScene" uid="uid://dhparujrn07ns" path="res://scenes/characters/character1.tscn" id="4_po8tt"]
+[ext_resource type="PackedScene" uid="uid://q8mg3rv7ipgt" path="res://scenes/objects/card.tscn" id="5_lplu6"]
+[ext_resource type="FontFile" uid="uid://biif0kneo0ohn" path="res://assets/fonts/CaslonAntique.ttf" id="6_n26pl"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7xmst"]
 
@@ -77,6 +80,12 @@ _data = {
 &"start_level": SubResource("Animation_lquwl")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_jiuw2"]
+paragraph_spacing = -27.055
+font = ExtResource("6_n26pl")
+font_size = 50
+font_color = Color(0.1812, 0.1812, 0.1812, 1)
+
 [node name="TemplateNode" type="Node"]
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -111,3 +120,51 @@ libraries = {
 }
 autoplay = "start_level"
 playback_auto_capture = false
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="Stage"]
+offset_left = 140.0
+offset_top = 100.0
+offset_right = 740.0
+offset_bottom = 400.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Char1" parent="Stage" instance=ExtResource("4_po8tt")]
+position = Vector2(402, 147)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Char2" parent="Stage" instance=ExtResource("4_po8tt")]
+position = Vector2(485, 148)
+rotation = 3.14159
+scale = Vector2(-1, -1)
+
+[node name="Cards" type="Node2D" parent="."]
+position = Vector2(341, 561)
+
+[node name="Card1" parent="Cards" instance=ExtResource("5_lplu6")]
+position = Vector2(731, -396)
+
+[node name="Card2" parent="Cards" instance=ExtResource("5_lplu6")]
+position = Vector2(732, -200)
+
+[node name="Card3" parent="Cards" instance=ExtResource("5_lplu6")]
+position = Vector2(732, -13)
+
+[node name="Dialogues" type="Node2D" parent="."]
+position = Vector2(-57, 1217)
+
+[node name="Dialogue1" type="Label" parent="Dialogues"]
+offset_left = 196.0
+offset_top = -761.0
+offset_right = 1080.0
+offset_bottom = -541.0
+theme_override_font_sizes/font_size = 2
+text = "¿Conoces a la niña alegre e inocente?,
+de su amada abuela obtuvo un presente.
+Era una caperuza preciosa y roja,
+desde entonces la llamamos Caperucita roja."
+label_settings = SubResource("LabelSettings_jiuw2")
+metadata/_edit_use_anchors_ = true

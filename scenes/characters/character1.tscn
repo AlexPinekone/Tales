@@ -1,24 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhparujrn07ns"]
+[gd_scene load_steps=2 format=3 uid="uid://dhparujrn07ns"]
 
-[ext_resource type="Texture2D" uid="uid://xmrk1nnqvx7e" path="res://assets/art/characters/Walk.png" id="1_ofp2e"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_judcx"]
-atlas = ExtResource("1_ofp2e")
-region = Rect2(0, 0, 512, 512)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_p04g0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_judcx")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://bwhj4tt2ctqc4" path="res://assets/art/characters/abuela.png" id="2_judcx"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_p04g0")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_direction = 1
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_judcx")
+centered = false
