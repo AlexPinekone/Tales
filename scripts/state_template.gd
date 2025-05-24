@@ -13,7 +13,8 @@ func update(_delta: float) -> void:
 			animationTransition.play_backwards("start_level") #transicion de cambio o restart
 			await animationTransition.animation_finished #Esperar a que la transicion acabe
 			finished.emit(nextState) #cambiar al siguiente estado
-		else: #Logica del estado actual va aqui
+		else:
+
 			print("current state " + name)
 	else:
 		print("entering transition")
@@ -22,11 +23,10 @@ func update(_delta: float) -> void:
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enteringfinished = false
+	visible = true
+	$Transition.visible = true
 	if animationTransition and animationTransition.has_animation("start_level"):
 		animationTransition.play("start_level")
-		for children in get_children(): #Hacer todos los nodos del estado acutal visible
-			children.visible = true
-			pass
 		await animationTransition.animation_finished
 		enteringfinished = true
 		isExiting = false
@@ -37,7 +37,5 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func exit() -> void:
 	print("exiting " + name)
-	for children : Node2D in get_children(): #Hacer invisibles todos los nodos del estado actual antes de pasar al siguiente estado
-			children.visible = false
-			pass
+	visible = false
 	pass
