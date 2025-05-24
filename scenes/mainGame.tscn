@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4vx5dostc3m2" path="res://scripts/StateMachine.gd" id="1_3ttq8"]
 [ext_resource type="PackedScene" uid="uid://cogkr6mbgk3h3" path="res://scenes/main_menu.tscn" id="3_8nj48"]
-[ext_resource type="PackedScene" path="res://scenes/Intro.tscn" id="3_l7q4m"]
+[ext_resource type="PackedScene" uid="uid://mbyie8vefsjw" path="res://scenes/Intro.tscn" id="3_l7q4m"]
 
 [node name="GAME" type="Node2D"]
 
