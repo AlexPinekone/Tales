@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhep8iqo23n47"]
+[gd_scene load_steps=16 format=3 uid="uid://dhep8iqo23n47"]
 
 [ext_resource type="Texture2D" uid="uid://pj6bs16lc1iw" path="res://assets/art/background/gallery.png" id="1_v0ju2"]
 [ext_resource type="Shader" uid="uid://cevufy2datsp7" path="res://shaders/dissolve.gdshader" id="2_7nhrv"]
+[ext_resource type="Texture2D" uid="uid://bchvpkqcxfnxc" path="res://assets/art/characters/casa_abuela.png" id="3_n26pl"]
 [ext_resource type="Script" uid="uid://cs3kymxwiirh3" path="res://scripts/transition.gd" id="3_rcbml"]
+[ext_resource type="Texture2D" uid="uid://hlqhuvh4oo0k" path="res://assets/art/characters/caperucita.png" id="4_jiuw2"]
 [ext_resource type="PackedScene" uid="uid://dhparujrn07ns" path="res://scenes/characters/character1.tscn" id="4_po8tt"]
 [ext_resource type="PackedScene" uid="uid://q8mg3rv7ipgt" path="res://scenes/objects/card.tscn" id="5_lplu6"]
 [ext_resource type="FontFile" uid="uid://biif0kneo0ohn" path="res://assets/fonts/CaslonAntique.ttf" id="6_n26pl"]
@@ -86,7 +88,7 @@ _data = {
 &"start_level": SubResource("Animation_lquwl")
 }
 
-[node name="TemplateNode" type="Node"]
+[node name="TemplateNode" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -1)
@@ -128,10 +130,17 @@ position = Vector2(402, 147)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
+[node name="Sprite2D" parent="Stage/Char1/SubViewportContainer/SubViewport" index="0"]
+texture = ExtResource("3_n26pl")
+
 [node name="Char2" parent="Stage" instance=ExtResource("4_po8tt")]
 position = Vector2(485, 148)
 rotation = 3.14159
 scale = Vector2(-1, -1)
+
+[node name="Sprite2D" parent="Stage/Char2/SubViewportContainer/SubViewport" index="0"]
+texture = ExtResource("4_jiuw2")
+flip_h = true
 
 [node name="Cards" type="Node2D" parent="."]
 position = Vector2(341, 561)
@@ -145,23 +154,21 @@ position = Vector2(732, -200)
 [node name="Card3" parent="Cards" instance=ExtResource("5_lplu6")]
 position = Vector2(732, -13)
 
-[node name="Dialogues" type="Node2D" parent="."]
-position = Vector2(-57, 1217)
-
-[node name="Dialogue1" type="Label" parent="Dialogues"]
-offset_left = 196.0
-offset_top = -761.0
-offset_right = 1080.0
-offset_bottom = -541.0
+[node name="Dialogue1" type="Label" parent="."]
+offset_left = 114.0
+offset_top = 446.0
+offset_right = 998.0
+offset_bottom = 666.0
 theme_override_font_sizes/font_size = 2
-text = "¿Conoces a la niña alegre e inocente?,
-de su amada abuela obtuvo un presente.
-Era una caperuza preciosa y roja,
-desde entonces la llamamos Caperucita roja."
+text = "Caperucita no tardo en llegar a su destino,
+pues viajó sin distraerse por el camino.
+Preocupada entro a casa de su abuela,
+y en cama la encontró todavía enferma."
 label_settings = SubResource("LabelSettings_jiuw2")
 metadata/_edit_use_anchors_ = true
 
 [node name="Transition" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_po8tt")
 position = Vector2(640.25, 360.5)
 scale = Vector2(0.665365, 0.665741)
@@ -175,3 +182,6 @@ libraries = {
 }
 autoplay = "start_level"
 playback_auto_capture = false
+
+[editable path="Stage/Char1"]
+[editable path="Stage/Char2"]
