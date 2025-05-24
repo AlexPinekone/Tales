@@ -7,6 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://q8mg3rv7ipgt" path="res://scenes/objects/card.tscn" id="5_lplu6"]
 [ext_resource type="FontFile" uid="uid://biif0kneo0ohn" path="res://assets/fonts/CaslonAntique.ttf" id="6_n26pl"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_jiuw2"]
+paragraph_spacing = -27.055
+font = ExtResource("6_n26pl")
+font_size = 50
+font_color = Color(0.1812, 0.1812, 0.1812, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7xmst"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8nj48"]
@@ -80,12 +86,6 @@ _data = {
 &"start_level": SubResource("Animation_lquwl")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_jiuw2"]
-paragraph_spacing = -27.055
-font = ExtResource("6_n26pl")
-font_size = 50
-font_color = Color(0.1812, 0.1812, 0.1812, 1)
-
 [node name="TemplateNode" type="Node"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -112,21 +112,6 @@ offset_top = -8.0
 offset_right = 1273.0
 offset_bottom = 712.0
 color = Color(0.12549, 0.188235, 0.196078, 0.494118)
-
-[node name="Transition" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_po8tt")
-position = Vector2(640.25, 360.5)
-scale = Vector2(0.665365, 0.665741)
-texture = ExtResource("1_v0ju2")
-script = ExtResource("3_rcbml")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
-reset_on_save = false
-libraries = {
-&"": SubResource("AnimationLibrary_272bh")
-}
-autoplay = "start_level"
-playback_auto_capture = false
 
 [node name="Stage" type="Node2D" parent="."]
 
@@ -175,3 +160,18 @@ Era una caperuza preciosa y roja,
 desde entonces la llamamos Caperucita roja."
 label_settings = SubResource("LabelSettings_jiuw2")
 metadata/_edit_use_anchors_ = true
+
+[node name="Transition" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_po8tt")
+position = Vector2(640.25, 360.5)
+scale = Vector2(0.665365, 0.665741)
+texture = ExtResource("1_v0ju2")
+script = ExtResource("3_rcbml")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_272bh")
+}
+autoplay = "start_level"
+playback_auto_capture = false
